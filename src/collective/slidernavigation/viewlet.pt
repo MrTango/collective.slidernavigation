@@ -1,0 +1,13 @@
+<div id="slidernav">
+  <ul id="slidernav-tabs">
+    <li><a href="#">Winterdienst</a></li>
+    <li><a href="#">Straßenreinigung</a></li>
+    <li><a href="#">Baumkontrolle</a></li>
+  </ul>
+
+  <div id="slidernav-panes">
+    <div>Winterdienst</div>
+    <div>Sommerdienst</div>
+    <div>Streckenkontrolle</div>
+  </div>
+</div>

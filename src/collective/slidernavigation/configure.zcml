@@ -1,0 +1,36 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.slidernavigation">
+
+
+  <browser:viewlet
+    name="collective.slidernavigation"
+    for="*"
+    manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+    class=".viewlet.SliderNavigation"
+    template="viewlet.pt"
+    permission="zope.Public"
+    layer=".interfaces.ISliderNavigation"
+    />
+
+  <browser:resource
+    name="collective.slidernavigation.slidernavigation.js"
+    layer="collective.slidernavigation.interfaces.ISliderNavigation"
+    file="slidernavigation.js"
+    />
+
+
+
+
+  <genericsetup:registerProfile
+    name="default"
+    title="collective.slidernavigation"
+    directory="profiles/default"
+    description="This Add-on provides a jQuery slider navigation viewlet."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
+</configure>
+

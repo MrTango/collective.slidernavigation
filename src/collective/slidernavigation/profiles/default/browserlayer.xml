@@ -1,0 +1,6 @@
+<layers>
+  <layer 
+    name="collective.slidernavigation"
+    interface="collective.slidernavigation.interfaces.ISliderNavigation"
+    />
+</layers>
