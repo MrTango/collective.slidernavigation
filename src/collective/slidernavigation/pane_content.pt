@@ -1,0 +1,13 @@
+<html>
+<tal:content_pane define="pane view/pane_content;">
+  <div id="pane_image">
+    <img tal:attributes="src pane/img_url;" 
+        tal:omit-tag="not:pane/img_url" />
+  </div>
+  <div>
+    <h1 tal:content="pane/title" />
+    <p tal:content="pane/description" />
+    <p tal:content="pane/id" />
+  </div>
+</tal:content_pane>
+</html>

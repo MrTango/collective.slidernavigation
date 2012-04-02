@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object name="portal_css">
+  <stylesheet id="++resource++collective.slidernavigation.slidernavigation.css"
+    cacheable="True"
+    compression="none"
+    cookable="True"
+    enabled="True"
+    expression=""
+    applyPrefix="True"
+    media="screen"
+    rel="stylesheet"
+    rendering="link"
+    insert-bottom=""
+    />
+</object>
+
+
