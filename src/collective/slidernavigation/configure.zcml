@@ -21,8 +21,20 @@
     file="slidernavigation.js"
     />
 
+  <browser:resource
+    name="collective.slidernavigation.slidernavigation.css"
+    layer="collective.slidernavigation.interfaces.ISliderNavigation"
+    file="slidernavigation.css"
+    />
 
-
+  <browser:page
+    name="pane_content"
+    for="*"
+    class=".views.PaneContentView"
+    template="pane_content.pt"
+    permission="zope.Public"
+    layer="collective.slidernavigation.interfaces.ISliderNavigation"
+    />
 
   <genericsetup:registerProfile
     name="default"
