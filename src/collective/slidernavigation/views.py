@@ -40,8 +40,11 @@ class PaneContentView(BrowserView):
         pane_content["id"] = brain.id
         pane_content["title"] = brain.Title
         pane_content["description"] = brain.Description
+        pane_content["url"] = brain.getURL()
         if brain.hasContentLeadImage:
-            pane_content["img_url"] = brain.getURL() + '/image_mini'
+            pane_content["img_base_url"] = pane_content["url"]
+        else:
+            pane_content["img_base_url"] = ''
         log.debug("pane content: %s" % pane_content)
         return pane_content
 

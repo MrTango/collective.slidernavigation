@@ -31,7 +31,7 @@
   text-decoration:none;
   color:#77777b;
   padding:0px;
-  margin:0px;
+  margin: 2px 0 0 0;
 }
 #slidernav-tabs li a.current{
   background-color: #fff;
@@ -46,3 +46,19 @@
 #slidernav-panes > div{
   display:block;
 }
+#pane-image-wrapper{
+  width: 316px;
+  display:block;
+  float:left;
+}
+#pane-image{
+  width: 100%;
+  height:231px;
+}
+#pane-content{
+  display:block;
+  float:left;
+  width: 300px;
+  padding: 0 0.5em 0 0.5em;
+}
+
