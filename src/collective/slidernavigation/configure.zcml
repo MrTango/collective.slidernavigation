@@ -7,7 +7,7 @@
 
   <browser:viewlet
     name="collective.slidernavigation"
-    for="*"
+    for="Products.ATContentTypes.interfaces.interfaces.IATContentType"
     manager="plone.app.layout.viewlets.interfaces.IAboveContent"
     class=".viewlet.SliderNavigation"
     template="viewlet.pt"

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="portal_properties" meta_type="Plone Properties Tool">
+  <object name="slidernavigation_properties" meta_type="Plone Property Sheet">
+     <property name="title">Collective Slidernavigation Properties</property>
+     <property name="top_level" type="int">0</property>
+     <property name="bottom_level" type="int">1</property>
+  </object>
+</object>
+

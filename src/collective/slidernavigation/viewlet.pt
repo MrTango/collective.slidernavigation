@@ -6,7 +6,7 @@
   <ul id="slidernav-tabs">
     <li tal:repeat="child view/children"><a 
       tal:attributes="href string:${child/getURL};
-                      rel string:${view/current_url}/@@pane_content?pane_content_uid=${child/UID};" 
+                      rel string:${view/base_url}/@@pane_content?pane_content_uid=${child/UID};" 
           tal:content="child/Title">Child</a></li>
   </ul>
 </div>
