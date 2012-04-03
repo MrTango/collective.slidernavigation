@@ -13,6 +13,7 @@ class SliderNavigation(ViewletBase):
         """
         self.portal = getSite()
         self.base_url = self.portal.portal_url
+        self.cpath = '/'.join(self.context.getPhysicalPath())
         self.children = self.get_children()
 
     def get_children(self):

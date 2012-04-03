@@ -23,6 +23,10 @@ jq(document).ready(function() {
  
   // load initial tab:
   var tabindex = 0;
+  var default_tab = jq("#slidernav-tabs .tab.default");
+  if(default_tab){
+    tabindex = default_tab.parent().index();
+  }
   load_pane_content(0, tabindex);
 
   // bind event handler to tabs

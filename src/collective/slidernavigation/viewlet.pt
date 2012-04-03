@@ -6,7 +6,8 @@
   <ul id="slidernav-tabs">
     <li tal:repeat="child view/children"><a 
       tal:attributes="href string:${child/getURL};
-                      rel string:${view/base_url}/@@pane_content?pane_content_uid=${child/UID};" 
+                      rel string:${view/base_url}/@@pane_content?pane_content_uid=${child/UID};
+                      class python:view.cpath == child.getPath() and 'tab default' or 'tab';"
           tal:content="child/Title">Child</a></li>
   </ul>
 </div>
