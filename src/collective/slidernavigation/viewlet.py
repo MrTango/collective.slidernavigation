@@ -47,7 +47,7 @@ class SliderNavigation(ViewletBase):
         else:
             path = current_path
         query={
-            'path': {'query': path},
+            'path': {'query': path, 'depth':1},
             'portal_type': 'Folder',
             'sort_on': 'getObjPositionInParent'
         }

@@ -1,7 +1,8 @@
 jq(document).ready(function() {
   jq("ul#slidernav-tabs").tabs("#slidernav-panes > div", {
-    effect: 'fade',
+    effect: 'default',
     event: 'mouseover',
+    initialIndex: 0,
     rotate: true,
   });
 
@@ -21,15 +22,16 @@ jq(document).ready(function() {
     }
   }
  
+
+  
   // load initial tab:
   var tabindex = 0;
-  var default_tab = jq("#slidernav-tabs .tab.default");
-  if(default_tab){
-    tabindex = default_tab.parent().index();
+  var default_tab = jq("#slidernav-tabs > li a.default").parent();
+  if(default_tab.length != 0){
+    tabindex = default_tab.index();
   }
   load_pane_content(0, tabindex);
-
+   
   // bind event handler to tabs
   jq("ul#slidernav-tabs").bind("mouseover load", load_pane_content);
-   
 });
