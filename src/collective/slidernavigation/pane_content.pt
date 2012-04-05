@@ -8,6 +8,11 @@
   <div id="pane-content">
     <h1 tal:content="pane/title" />
     <p tal:content="pane/description" />
+    <ul>
+    <li tal:repeat="link pane/links"><a 
+        tal:attributes="href link/url" 
+        tal:content="link/title" 
+        tal:omit-tag="not:link">Link</a></li>
   </div>
 </tal:content_pane>
 </html>

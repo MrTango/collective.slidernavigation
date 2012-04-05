@@ -8,7 +8,7 @@
     cookable="True"
     enabled="True"
     expression=""
-    insert-after="++resource++plone.app.jquerytools.js"
+    insert-after="++resource++plone.app.jquerytools.plugins.js"
     inline="False" />
 
 </object>

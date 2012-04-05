@@ -45,6 +45,13 @@ class PaneContentView(BrowserView):
             pane_content["img_base_url"] = pane_content["url"]
         else:
             pane_content["img_base_url"] = ''
+        link_query = {}
+        link_query["portal_type"] = 'Link'
+        link_query["path"] = {'query': brain.getPath(), 'depth':1}
+        link_query["sort_on"] = 'getObjPositionInParent'
+        link_results = portal_catalog(link_query)
+        pane_content["links"] = [{'title': link.Title, 'url': link.getRemoteUrl}\
+                for link in link_results]
         log.debug("pane content: %s" % pane_content)
         return pane_content
 
