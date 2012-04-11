@@ -12,6 +12,8 @@ class SliderNavigation(ViewletBase):
         """
         """
         self.portal = getSite()
+        self.autoplay = False
+        self.interval = None
         self.base_url = self.portal.portal_url
         self.cpath = '/'.join(self.context.getPhysicalPath())
         self.children = self.get_children()
@@ -42,6 +44,8 @@ class SliderNavigation(ViewletBase):
             current_path = '/'.join(self.context.getPhysicalPath())
 
         slidernavigation_source_path = self.context.getProperty("slidernavigation_source_path", None)
+        self.autoplay = self.context.getProperty("slidernavigation_autoplay", None)
+        self.interval = self.context.getProperty("slidernavigation_interval", 3000)
         if slidernavigation_source_path:
             path = slidernavigation_source_path
         else:

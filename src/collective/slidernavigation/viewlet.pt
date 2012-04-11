@@ -1,9 +1,11 @@
 <div id="slidernav">
   <div id="slidernav-panes">
-    <div>Slider default pane</div>
+    <div></div>
     <div tal:repeat="item python:view.children[1:]"></div>
   </div>
-  <ul id="slidernav-tabs">
+  <ul id="slidernav-tabs" 
+      tal:attributes="class python:view.autoplay and 'autoplay' or '';
+                      rel view/interval;">
     <li tal:repeat="child view/children"><a 
       tal:attributes="href string:${child/getURL};
                       rel string:${view/base_url}/@@pane_content?pane_content_uid=${child/UID};
