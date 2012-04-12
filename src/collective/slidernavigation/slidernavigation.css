@@ -40,6 +40,10 @@
   color:#234877;
 }
 
+.entry-tab{
+  display:none;
+}
+
 #slidernav-panes{
   float:left;
 }  

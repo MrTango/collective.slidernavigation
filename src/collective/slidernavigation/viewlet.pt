@@ -6,10 +6,14 @@
   <ul id="slidernav-tabs" 
       tal:attributes="class python:view.autoplay and 'autoplay' or '';
                       rel view/interval;">
+    <li class="entry-tab"><a tal:content="context/Title"
+        tal:attributes="href context/absolute_url;
+        rel string:${view/base_url}/@@pane_content?pane_content_uid=${context/UID};
+        class python:view.cpath == view.nav_source_context.absolute_url_path() and 'tab default' or 'tab';">Current folder</a></li>
     <li tal:repeat="child view/children"><a 
-      tal:attributes="href string:${child/getURL};
-                      rel string:${view/base_url}/@@pane_content?pane_content_uid=${child/UID};
-                      class python:view.cpath.startswith(child.getPath()) and 'tab default' or 'tab';"
+        tal:attributes="href string:${child/getURL};
+                        rel string:${view/base_url}/@@pane_content?pane_content_uid=${child/UID};
+                        class python:view.cpath.startswith(child.getPath()) and 'tab default' or 'tab';"
           tal:content="child/Title">Child</a></li>
   </ul>
 </div>

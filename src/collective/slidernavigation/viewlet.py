@@ -16,6 +16,7 @@ class SliderNavigation(ViewletBase):
         self.interval = None
         self.base_url = self.portal.portal_url
         self.cpath = '/'.join(self.context.getPhysicalPath())
+        self.nav_source_context = None
         self.children = self.get_children()
 
     def get_children(self):
@@ -40,8 +41,10 @@ class SliderNavigation(ViewletBase):
                 else:
                     current_context = aq_parent(aq_inner(current_context))
             path = current_path
+            self.nav_source_context = current_context
         else:
             current_path = '/'.join(self.context.getPhysicalPath())
+            self.nav_source_context = self.context
 
         slidernavigation_source_path = self.context.getProperty("slidernavigation_source_path", None)
         self.autoplay = self.context.getProperty("slidernavigation_autoplay", None)
@@ -57,6 +60,6 @@ class SliderNavigation(ViewletBase):
         }
         results = portal_catalog(query)
         children = [child for child in results
-                if not child.exclude_from_nav and not child.getPath() == path]
+                if not child.exclude_from_nav]
         return children
 
