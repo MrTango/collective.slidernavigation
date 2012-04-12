@@ -25,13 +25,15 @@ class SliderNavigation(ViewletBase):
         portal_catalog = self.portal.portal_catalog
         plone_portal_state = getMultiAdapter((self.context, self.request),
                 name='plone_portal_state')
+        plone_context_state = getMultiAdapter((self.context, self.request),
+                name='plone_context_state')
         sproperties = self.portal.portal_properties.get("slidernavigation_properties", None)
+        current_context = plone_context_state.folder()
         if sproperties:
             bottom_level = sproperties.getProperty("bottom_level", 0)
             navigation_root_path = plone_portal_state.navigation_root_path()
             navigation_root = navigation_root_path.split("/")
             navigation_root_offset = len(navigation_root)
-            current_context = self.context
             under_bottom_level = True
             while under_bottom_level:
                 current_path = '/'.join(current_context.getPhysicalPath())
@@ -43,8 +45,8 @@ class SliderNavigation(ViewletBase):
             path = current_path
             self.nav_source_context = current_context
         else:
-            current_path = '/'.join(self.context.getPhysicalPath())
-            self.nav_source_context = self.context
+            current_path = '/'.join(current_context.getPhysicalPath())
+            self.nav_source_context = current_context
 
         slidernavigation_source_path = self.context.getProperty("slidernavigation_source_path", None)
         self.autoplay = self.context.getProperty("slidernavigation_autoplay", None)
