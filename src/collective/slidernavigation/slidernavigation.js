@@ -1,12 +1,15 @@
 jq(document).ready(function(){
   jq("ul#slidernav-tabs").tabs("#slidernav-panes > div",{
-    effect: 'default',
+    effect: 'fade',
+    fadeInSpeed: 500,
+    fadeOutSpeed: 1000,
     event: 'dblclick',
     initialIndex: 0,
     rotate: true,
   }).slideshow({
     autoplay: false,
     interval: jq("ul#slidernav-tabs").attr("rel"),
+    clickable: false,
   });
 
   var api = jq("#slidernav-tabs").data("tabs");

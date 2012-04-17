@@ -46,9 +46,13 @@
 
 #slidernav-panes{
   float:left;
+  position:relative;
 }  
 #slidernav-panes > div{
   display:block;
+  position:absolute;
+  top:0;
+  left:0;
 }
 #pane-image-wrapper{
   width: 316px;
