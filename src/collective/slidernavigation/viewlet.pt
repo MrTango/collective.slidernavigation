@@ -1,5 +1,6 @@
 <div id="slidernav">
   <div id="slidernav-panes">
+    <div tal:condition="not:view/autoplay|nothing"></div>
     <div></div>
     <div tal:repeat="item python:view.children[1:]"></div>
   </div>

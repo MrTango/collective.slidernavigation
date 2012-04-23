@@ -14,7 +14,7 @@ class SliderNavigation(ViewletBase):
         self.portal = getSite()
         self.autoplay = False
         self.interval = None
-        self.base_url = self.portal.portal_url
+        self.base_url = self.portal.portal_url()
         self.cpath = '/'.join(self.context.getPhysicalPath())
         self.nav_source_context = None
         self.children = self.get_children()

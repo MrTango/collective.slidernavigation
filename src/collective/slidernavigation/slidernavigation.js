@@ -15,7 +15,6 @@ jq(document).ready(function(){
   var api = jq("#slidernav-tabs").data("tabs");
 
   function load_pane_content(event, index){
-    console.log("load");
     if(index == undefined){
       var index = api.getIndex();
     }
