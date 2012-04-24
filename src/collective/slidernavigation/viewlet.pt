@@ -4,9 +4,7 @@
     <div></div>
     <div tal:repeat="item python:view.children[1:]"></div>
   </div>
-  <ul id="slidernav-tabs" 
-      tal:attributes="class python:view.autoplay and 'autoplay' or '';
-                      rel view/interval;">
+  <ul id="slidernav-tabs">
     <li class="entry-tab" 
         tal:condition="not:view/autoplay|nothing"><a tal:content="context/Title"
         tal:attributes="href view/nav_source_context/absolute_url;
@@ -19,4 +17,21 @@
                         class python:view.cpath.startswith(child.getPath()) and 'tab default' or 'tab';"
           tal:content="child/Title">Child</a></li>
   </ul>
+  <div id="slidernav-config" style="display:none;">
+    <span id="autoplay" 
+        tal:condition="view/autoplay|nothing" 
+        tal:attributes="rel view/autoplay;" />
+    <span id="interval" 
+        tal:condition="view/interval|nothing" 
+        tal:attributes="rel view/interval;" />
+    <span id="effect" 
+        tal:condition="view/effect|nothing" 
+        tal:attributes="rel view/effect;" />
+    <span id="fade-in-speed" 
+        tal:condition="view/fade_in_speed|nothing" 
+        tal:attributes="rel view/fade_in_speed;" />
+    <span id="fade-out-speed" 
+        tal:condition="view/fade_out_speed|nothing" 
+        tal:attributes="rel view/fade_out_speed;" />
+  </div>
 </div>

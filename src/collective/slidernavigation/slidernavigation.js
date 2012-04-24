@@ -1,14 +1,14 @@
 jq(document).ready(function(){
   jq("ul#slidernav-tabs").tabs("#slidernav-panes > div",{
-    effect: 'fade',
-    fadeInSpeed: 500,
-    fadeOutSpeed: 1000,
+    effect: jq("#slidernav #effect").attr('rel'),
+    fadeInSpeed: jq("#slidernav #fade-in-speed").attr('rel'),
+    fadeOutSpeed: jq("#slidernav #fade-out-speed").attr('rel'),
     event: 'dblclick',
     initialIndex: 0,
     rotate: true,
   }).slideshow({
-    autoplay: false,
-    interval: jq("ul#slidernav-tabs").attr("rel"),
+    autoplay: jq("#slidernav #autoplay").attr('rel'),
+    interval: jq("#slidernav #interval").attr('rel'),
     clickable: false,
   });
 
