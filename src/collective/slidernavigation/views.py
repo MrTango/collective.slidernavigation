@@ -44,7 +44,7 @@ class PaneContentView(BrowserView):
         if brain.hasContentLeadImage:
             pane_content["img_base_url"] = pane_content["url"]
         else:
-            pane_content["img_base_url"] = ''
+            pane_content["img_base_url"] = portal.portal_url() + '++theme++mobiworxde/images/empty_teaser.png'
         link_query = {}
         link_query["portal_type"] = 'Link'
         link_query["path"] = {'query': brain.getPath(), 'depth':1}
