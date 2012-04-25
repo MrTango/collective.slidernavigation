@@ -7,7 +7,7 @@ jq(document).ready(function(){
     initialIndex: 0,
     rotate: true,
   }).slideshow({
-    autoplay: jq("#slidernav #autoplay").attr('rel'),
+    autoplay: Boolean(Number(jq("#slidernav #autoplay").attr('rel'))),
     interval: jq("#slidernav #interval").attr('rel'),
     clickable: false,
   });
@@ -41,11 +41,6 @@ jq(document).ready(function(){
      
     // bind event handler to tabs
     jq("ul#slidernav-tabs").bind("onBeforeClick load", load_pane_content);
-    
-    var slidernavtabs = jq("#slidernav-tabs");
-    if(slidernavtabs.hasClass("autoplay")){
-      slidernavtabs.data("slideshow").play();
-    }
   }
    
 });

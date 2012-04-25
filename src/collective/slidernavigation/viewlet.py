@@ -54,9 +54,9 @@ class SliderNavigation(ViewletBase):
         slidernavigation_source_path = self.context.getProperty("slidernavigation_source_path", None)
         autoplay = self.context.getProperty("slidernavigation_autoplay", False)
         if autoplay:
-            self.autoplay = 'true'
+            self.autoplay = 1
         else:
-            self.autoplay = 'false'
+            self.autoplay = 0
         self.interval = self.context.getProperty("slidernavigation_interval", 3000)
         self.fade_in_speed = self.context.getProperty("slidernavigation_fadeinspeed", 500)
         self.fade_out_speed = self.context.getProperty("slidernavigation_fadeoutspeed", 1000)
