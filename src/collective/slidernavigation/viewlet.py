@@ -21,6 +21,12 @@ class SliderNavigation(ViewletBase):
         self.cpath = '/'.join(self.context.getPhysicalPath())
         self.nav_source_context = None
         self.children = self.get_children()
+        pane_content_view = self.portal.unrestrictedTraverse('@@pane_content')
+        if len(self.children):
+            self.initial_pane_content = pane_content_view.__call__(self.children[0]['UID'])
+        else:
+            self.initial_pane_content = pane_content_view.__call__(self.context.UID())
+
 
     def get_children(self):
         """ return filtered navigation children of the curent folder

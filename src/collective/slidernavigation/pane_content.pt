@@ -1,4 +1,3 @@
-<html>
 <tal:content_pane define="pane view/pane_content;">
   <div id="pane-image-wrapper" 
       tal:attributes="style string:background:transparent url(${pane/img_base_url}/leadImage_preview) center center no-repeat;" 
@@ -19,4 +18,3 @@
         tal:omit-tag="not:link">Link</a></li>
   </div>
 </tal:content_pane>
-</html>

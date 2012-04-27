@@ -1,7 +1,7 @@
 <div id="slidernav">
   <div id="slidernav-panes">
     <div tal:condition="not:view/autoplay|nothing"></div>
-    <div></div>
+    <div tal:content="structure view/initial_pane_content" class="loaded"></div>
     <div tal:repeat="item python:view.children[1:]"></div>
   </div>
   <ul id="slidernav-tabs">

@@ -10,21 +10,23 @@ class PaneContentView(BrowserView):
     """ Return pane content as HTML and will be called by AJAX request.
     """
 
-    def __call__(self):
+    def __call__(self, uid=None):
         """
         """
         self.pane_content = {}
-        self.pane_content = self.get_pane_content()
+        self.pane_content = self.get_pane_content(uid)
         return self.index()
 
 
-    def get_pane_content(self):
+    def get_pane_content(self, uid=None):
         """ Return pane content as dict.
         """
         portal = getSite()
         portal_catalog = portal.portal_catalog
         query = {}
-        uid = self.request.get("pane_content_uid")
+        if not uid:
+            uid = self.request.get("pane_content_uid")
+        print uid
         if not uid:
             log.debug("no uid given!")
             return

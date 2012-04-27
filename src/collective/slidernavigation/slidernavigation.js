@@ -27,6 +27,18 @@ jq(document).ready(function(){
       }
     }
     
+    function pre_load_panes(){
+      api.getPanes().each(function(tabindex, tab){
+        var pane = api.getPanes().eq(tabindex)
+        if(tabindex != 0){
+          pane.load(api.getTabs().eq(tabindex).attr("rel")).addClass("loaded").hide();
+        }
+      });
+    }
+
+     
+    // bind event handler to tabs
+    jq("ul#slidernav-tabs").bind("onBeforeClick load", load_pane_content);
 
     // load initial tab:
     var tabindex = 0;
@@ -34,13 +46,11 @@ jq(document).ready(function(){
     if(default_tab.length != 0){
       tabindex = default_tab.index();
     }
-    // activate tab
     api.click(tabindex);
-    // load pane content
     load_pane_content(0, tabindex);
-     
-    // bind event handler to tabs
-    jq("ul#slidernav-tabs").bind("onBeforeClick load", load_pane_content);
+    if(Number(jq("#slidernav #autoplay").attr('rel') == 1)){
+      pre_load_panes();
+    }; 
   }
    
 });
