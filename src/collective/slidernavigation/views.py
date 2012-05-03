@@ -26,7 +26,6 @@ class PaneContentView(BrowserView):
         query = {}
         if not uid:
             uid = self.request.get("pane_content_uid")
-        print uid
         if not uid:
             log.debug("no uid given!")
             return
