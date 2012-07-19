@@ -31,6 +31,11 @@ setup(name='collective.slidernavigation',
     include_package_data=True,
     zip_safe=False,
     install_requires=install_requires,
+    extras_require = {
+        'test': [
+            'plone.app.testing',
+        ]
+    },
     entry_points={
         'console_scripts':
             ['collective.slidernavigation=collective.slidernavigation:main']

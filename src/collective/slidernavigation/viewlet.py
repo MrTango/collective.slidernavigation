@@ -21,7 +21,9 @@ class SliderNavigation(ViewletBase):
         self.cpath = '/'.join(self.context.getPhysicalPath())
         self.nav_source_context = None
         self.children = self.get_children()
-        pane_content_view = self.portal.unrestrictedTraverse('@@pane_content')
+        pane_content_view = getMultiAdapter((self.context,
+            self.request), name=u"pane_content")
+        #pane_content_view = self.portal.unrestrictedTraverse('@@pane_content')
         if len(self.children):
             self.initial_pane_content = pane_content_view.__call__(self.children[0]['UID'])
         else:
