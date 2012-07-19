@@ -15,6 +15,7 @@
     <ul>
     <li tal:repeat="link pane/links"><a 
         tal:attributes="href link/url" 
+        target="_blank"
         tal:content="link/title" 
         tal:omit-tag="not:link">Link</a></li>
   </div>
