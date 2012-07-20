@@ -1,0 +1,6 @@
+TODO
+====
+
+- we need more tests
+- we also need some Javascript tests, to test the slideshow
+- we could use collective.configviews for settings instead of properties, this would be much simpler for user to use
