@@ -34,16 +34,22 @@ class TestSlidernavigationViewlet(unittest.TestCase):
         self.folder.invokeFactory('Folder', 'subfolder2')
         self.subfolder2 = self.folder['subfolder2']
 
-
-
-    def test_viewlet_tabs(self):
+    def test_viewlet_tabs_in_folder(self):
         self.context = self.folder
         viewlet = SliderNavigation(self.context, self.request, None, None)
         viewlet.update()
         # there should be two tabs
         self.assertTrue(len(viewlet.get_children()) == 2, "folder should have 2 children")
 
-
+    def test_viewlet_tabs_in_subfolder(self):
+        self.context = self.subfolder1
+        viewlet = SliderNavigation(self.context, self.request, None, None)
+        viewlet.update()
+        viewlet.bottom_level = 3
+        viewlet.nav_source_context = viewlet.get_nav_source_context()
+        viewlet.get_children()
+        # there should be two tabs
+        self.assertTrue(len(viewlet.get_children()) == 3, "subfolder1 should have 3 children")
 
 def test_suite():
         return unittest.defaultTestLoader.loadTestsFromName(__name__)

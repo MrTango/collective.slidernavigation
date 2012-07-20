@@ -12,36 +12,86 @@ class SliderNavigation(ViewletBase):
         """
         """
         self.portal = getSite()
-        self.autoplay = False
-        self.interval = None
-        self.fade_in_speed = None
-        self.fade_out_speed = None
-        self.effect = None
         self.base_url = self.portal.portal_url()
         self.cpath = '/'.join(self.context.getPhysicalPath())
-        self.nav_source_context = None
+
+        sn_properties = self.get_sn_properties()
+        self.bottom_level = sn_properties['bottom_level']
+
+        sn_cproperties = self.get_sn_cproperties()
+        self.sn_source_path = sn_cproperties['sn_source_path']
+        self.autoplay = sn_cproperties['autoplay']
+        self.interval = sn_cproperties['interval']
+        self.fade_in_speed = sn_cproperties['fade_in_speed']
+        self.fade_out_speed = sn_cproperties['fade_out_speed']
+        self.effect = sn_cproperties['effect']
+
+        self.nav_source_context = self.get_nav_source_context()
         self.children = self.get_children()
+        self.initial_pane_content = self.get_initial_pane_content()
+
+
+    def get_initial_pane_content(self):
+        """ return inital rendered pane content
+        """
         pane_content_view = getMultiAdapter((self.context,
             self.request), name=u"pane_content")
         #pane_content_view = self.portal.unrestrictedTraverse('@@pane_content')
         if len(self.children):
-            self.initial_pane_content = pane_content_view.__call__(self.children[0]['UID'])
+            initial_pane_content = pane_content_view.__call__(self.children[0]['UID'])
         else:
-            self.initial_pane_content = pane_content_view.__call__(self.context.UID())
+            initial_pane_content = pane_content_view.__call__(self.context.UID())
+        return initial_pane_content
 
-
-    def get_children(self):
-        """ return filtered navigation children of the curent folder
+    def get_sn_properties(self):
+        """ return slidernavigation properties from:
+            portal_properties/slidernavigation_properties
+            return: {'bottom_level': bottom_level}
         """
-        portal_catalog = self.portal.portal_catalog
+        properties = {}
+        plone_tools = getMultiAdapter((self.context, self.request),
+                name='plone_tools')
+        pproperties = plone_tools.properties()
+        sn_properties = pproperties.get("slidernavigation_properties", None)
+        if not sn_properties:
+            return
+        properties['bottom_level'] = sn_properties.getProperty("bottom_level", 0)
+        return properties
+
+    def get_sn_cproperties(self):
+        """ return slidernavigation from context
+            return: {
+                'sn_source_path': sn_source_path,
+                'autoplay': autoplay
+            }
+        """
+        cproperties = {}
+        cproperties['sn_source_path'] = \
+                self.context.getProperty("sn_source_path", None)
+        autoplay = self.context.getProperty("slidernavigation_autoplay", False)
+        if autoplay:
+            cproperties['autoplay'] = 1
+        else:
+            cproperties['autoplay'] = 0
+        cproperties['interval'] = \
+                self.context.getProperty("slidernavigation_interval", 3000)
+        cproperties['fade_in_speed'] = \
+                self.context.getProperty("slidernavigation_fadeinspeed", 500)
+        cproperties['fade_out_speed'] = \
+                self.context.getProperty("slidernavigation_fadeoutspeed", 1000)
+        cproperties['effect'] = \
+                self.context.getProperty("slidernavigation_effect", 'default')
+        return cproperties
+
+    def get_nav_source_context(self):
+        """ return current context object but respect self.bottom_level
+        """
         plone_portal_state = getMultiAdapter((self.context, self.request),
                 name='plone_portal_state')
         plone_context_state = getMultiAdapter((self.context, self.request),
                 name='plone_context_state')
-        sproperties = self.portal.portal_properties.get("slidernavigation_properties", None)
         current_context = plone_context_state.folder()
-        if sproperties:
-            bottom_level = sproperties.getProperty("bottom_level", 0)
+        if self.bottom_level:
             navigation_root_path = plone_portal_state.navigation_root_path()
             navigation_root = navigation_root_path.split("/")
             navigation_root_offset = len(navigation_root)
@@ -49,31 +99,22 @@ class SliderNavigation(ViewletBase):
             while under_bottom_level:
                 current_path = '/'.join(current_context.getPhysicalPath())
                 current_level = len(current_path.split("/")) - navigation_root_offset
-                if current_level <= bottom_level:
+                if current_level <= self.bottom_level:
                     under_bottom_level = False
                 else:
                     current_context = aq_parent(aq_inner(current_context))
-            path = current_path
-            self.nav_source_context = current_context
-        else:
-            current_path = '/'.join(current_context.getPhysicalPath())
-            self.nav_source_context = current_context
+        return current_context
 
-        slidernavigation_source_path = self.context.getProperty("slidernavigation_source_path", None)
-        autoplay = self.context.getProperty("slidernavigation_autoplay", False)
-        if autoplay:
-            self.autoplay = 1
+    def get_children(self):
+        """ return filtered children braines of self.sn_source_path
+            if is set or nav_source_path
+        """
+        portal_catalog = self.portal.portal_catalog
+        nav_source_path = '/'.join(self.nav_source_context.getPhysicalPath())
+        if self.sn_source_path:
+            path = self.sn_source_path
         else:
-            self.autoplay = 0
-        self.interval = self.context.getProperty("slidernavigation_interval", 3000)
-        self.fade_in_speed = self.context.getProperty("slidernavigation_fadeinspeed", 500)
-        self.fade_out_speed = self.context.getProperty("slidernavigation_fadeoutspeed", 1000)
-        self.effect = self.context.getProperty("slidernavigation_effect", 'default')
-
-        if slidernavigation_source_path:
-            path = slidernavigation_source_path
-        else:
-            path = current_path
+            path = nav_source_path
         query={
             'path': {'query': path, 'depth':1},
             'portal_type': 'Folder',
