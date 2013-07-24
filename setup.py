@@ -36,8 +36,8 @@ setup(name='collective.slidernavigation',
             'plone.app.testing',
         ]
     },
-    entry_points={
-        'console_scripts':
-            ['collective.slidernavigation=collective.slidernavigation:main']
-    }
+    entry_points="""
+      [z3c.autoinclude.plugin]
+      target = plone
+    """,
 )
