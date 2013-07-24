@@ -31,6 +31,6 @@ Here you can set the bottom_level for slidernavigation. If you want to use the s
 Credits
 -------
 
-- `Inqbus`_ for the first release of this distribution
+- Maik Derstappen - `Derico`_ for the first release of this distribution
 
-.. _Inqbus: http://www.inqbus.de/
+.. _Derico: http://www.derico.de/
