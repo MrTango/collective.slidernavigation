@@ -1,18 +1,18 @@
-jq(document).ready(function(){
-  jq("ul#slidernav-tabs").tabs("#slidernav-panes > div",{
-    effect: jq("#slidernav #effect").attr('rel'),
-    fadeInSpeed: jq("#slidernav #fade-in-speed").attr('rel'),
-    fadeOutSpeed: jq("#slidernav #fade-out-speed").attr('rel'),
+$(document).ready(function(){
+  $("ul#slidernav-tabs").tabs("#slidernav-panes > div",{
+    effect: $("#slidernav #effect").attr('rel'),
+    fadeInSpeed: $("#slidernav #fade-in-speed").attr('rel'),
+    fadeOutSpeed: $("#slidernav #fade-out-speed").attr('rel'),
     event: 'dblclick',
     initialIndex: 0,
     rotate: true,
   }).slideshow({
-    autoplay: Boolean(Number(jq("#slidernav #autoplay").attr('rel'))),
-    interval: jq("#slidernav #interval").attr('rel'),
+    autoplay: Boolean(Number($("#slidernav #autoplay").attr('rel'))),
+    interval: $("#slidernav #interval").attr('rel'),
     clickable: false,
   });
 
-  var api = jq("#slidernav-tabs").data("tabs");
+  var api = $("#slidernav-tabs").data("tabs");
   if(api != undefined){
     function load_pane_content(event, index){
       if(index == undefined){
@@ -26,7 +26,7 @@ jq(document).ready(function(){
         pane.load(api.getTabs().eq(index).attr("rel")).addClass("loaded");
       }
     }
-    
+
     function pre_load_panes(){
       api.getPanes().each(function(tabindex, tab){
         var pane = api.getPanes().eq(tabindex)
@@ -36,21 +36,21 @@ jq(document).ready(function(){
       });
     }
 
-     
+
     // bind event handler to tabs
-    jq("ul#slidernav-tabs").bind("onBeforeClick load", load_pane_content);
+    $("ul#slidernav-tabs").bind("onBeforeClick load", load_pane_content);
 
     // load initial tab:
     var tabindex = 0;
-    var default_tab = jq("#slidernav-tabs > li a.default").parent();
+    var default_tab = $("#slidernav-tabs > li a.default").parent();
     if(default_tab.length != 0){
       tabindex = default_tab.index();
     }
     api.click(tabindex);
     load_pane_content(0, tabindex);
-    if(Number(jq("#slidernav #autoplay").attr('rel') == 1)){
+    if(Number($("#slidernav #autoplay").attr('rel') == 1)){
       pre_load_panes();
-    }; 
+    };
   }
-   
+
 });
